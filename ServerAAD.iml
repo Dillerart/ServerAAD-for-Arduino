@@ -53,5 +53,6 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
     <orderEntry type="library" name="RXTXcomm" level="project" />
+    <orderEntry type="library" name="pde" level="project" />
   </component>
 </module>

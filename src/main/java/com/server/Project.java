@@ -1,6 +1,8 @@
 package com.server;
 
 
+import com.server.arduino.Arduino;
+import com.server.arduino.ArduinoConnector;
 import com.server.controller.Factory;
 import com.server.controller.HibernateUtil;
 import com.server.table.Alarms;
@@ -20,9 +22,17 @@ public class Project {
 
     public static void main(String[] args) {
 
-        measurement = new Measurement();
-        measurement.setMeasurement("Пожар");
-        Factory.getInstanse().getdMeasurement().addMeasurement(measurement);
+//        measurement = new Measurement();
+//        measurement.setMeasurement("Пожар");
+//        Factory.getInstanse().getdMeasurement().addMeasurement(measurement);
+
+        ArduinoConnector arduinoConnector = new ArduinoConnector();
+
+        Thread t = new Thread(arduinoConnector);
+
+        t.start();
+
+
 
     }
 }
