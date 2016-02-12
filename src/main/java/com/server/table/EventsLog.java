@@ -2,67 +2,54 @@ package com.server.table;
 
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Time;
+import java.util.Date;
 
 @Entity
-@Table(name = "events_log")
+@Table(name = "Events")
 public class EventsLog {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id_events")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int id_event;
 
-    @Column(name = "id_sensor")
-    private int id_sensor;
+    @Column(name = "id_parameter")
+    private int id_param;
 
-    @Column(name = "dateMessenge")
-    private Date dateMessenge;
+    @Column(name = "id_object")
+    private int id_object;
 
-    @Column(name = "event")
-    private String event;
+    @Column(name = "date")
+    private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private Sensor sensor;
+    @Column(name = "time")
+    private Time time;
 
-    public Sensor getSensor() {
-        return sensor;
+    @Column(name = "value")
+    private double value;
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public int getId() {
-        return id;
+    public void setId_event(int id_event) {
+        this.id_event = id_event;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_param(int id_param) {
+        this.id_param = id_param;
     }
 
-    public int getId_sensor() {
-        return id_sensor;
+    public void setId_object(int id_object) {
+        this.id_object = id_object;
     }
 
-    public void setId_sensor(int id_sensor) {
-        this.id_sensor = id_sensor;
-    }
-
-    public Date getDateMessenge() {
-        return dateMessenge;
-    }
-
-    public void setDateMessenge(Date dateMessenge) {
-        this.dateMessenge = dateMessenge;
-    }
-
-    public String getEvent() {
-        return event;
-    }
-
-    public void setEvent(String event) {
-        this.event = event;
+    public void setValue(double value) {
+        this.value = value;
     }
 }

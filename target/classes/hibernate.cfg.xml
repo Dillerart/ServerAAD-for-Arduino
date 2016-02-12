@@ -14,9 +14,7 @@
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="com.server.table.Sensor"/>
-        <mapping class="com.server.table.Alarms"/>
-        <mapping class="com.server.table.Measurement"/>
+
         <mapping class="com.server.table.EventsLog"/>
 
     </session-factory>
