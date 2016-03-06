@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+//Читаем с конфигурационный файл config.properties
 public class ArduinoConfig {
 
     private String confPath = "config.properties";

@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
+//Таблица Событий, рассматривается только запись в БД
 @Entity
 @Table(name = "Events")
 public class EventsLog {

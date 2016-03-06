@@ -1,12 +1,6 @@
 package com.server;
 
 import com.server.arduino.ArduinoConnector;
-import sun.util.calendar.LocalGregorianCalendar;
-
-import java.sql.Time;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 
 public class Project {
@@ -17,6 +11,7 @@ public class Project {
 
         Thread t = new Thread(arduinoConnector);
 
+        //Стартуем чтение данных с Ардуино + запись данных в БД.
         t.start();
     }
 }

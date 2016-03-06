@@ -11,9 +11,8 @@ import com.server.controller.Factory;
 import com.server.table.EventsLog;
 import gnu.io.*;
 
+//Получаем данные с Arduino
 public class ArduinoConnector implements Runnable {
-
-    private Locale local = new Locale("ru","RU");
 
     private BufferedReader bRead = null;
 
@@ -27,8 +26,6 @@ public class ArduinoConnector implements Runnable {
 
     private String PORT_NAME;
 
-    private String ardText;
-
     private int t;
 
     private int p;
@@ -36,8 +33,6 @@ public class ArduinoConnector implements Runnable {
     private int rh;
 
     private int id_object;
-
-
 
     public ArduinoConnector() {
         ArduinoConfig arduinoConfig = new ArduinoConfig();
@@ -51,6 +46,7 @@ public class ArduinoConnector implements Runnable {
         this.id_object = arduinoConfig.getId_object();
     }
 
+    //Запуск потока чтения данных с Ардуино, и передача данных в БД через Hibernate
     public void run() {
         CommPortIdentifier portID = null;
         try {
@@ -60,7 +56,9 @@ public class ArduinoConnector implements Runnable {
                     SerialPort.DATABITS_8,
                     SerialPort.STOPBITS_1,
                     SerialPort.PARITY_NONE);
+            //Считываем поток с Ардуино.
             bRead = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
+            //Цикл, пока программа работает мы передаем данные из Ардуино в БД, с задеркой по времени.
             while (true) {
                 setValueDav(Double.parseDouble(bRead.readLine()));
                 setValueTemp(Double.parseDouble(bRead.readLine()));
@@ -83,10 +81,12 @@ public class ArduinoConnector implements Runnable {
         }
     }
 
+    //Сохранение в БД
     private void saveToBase(EventsLog log){
         Factory.getInstanse().getdEventsLog().addEventsLog(log);
     }
 
+    //Подготовка и передача даннх в метод saveToBase
     private void setValueDav(double valueDav){
         EventsLog dav = new EventsLog();
         dav.setId_param(this.p);
@@ -96,6 +96,8 @@ public class ArduinoConnector implements Runnable {
         dav.setValue(valueDav);
         saveToBase(dav);
     }
+
+    //Подготовка и передача даннх в метод saveToBase
     private void setValueTemp(double valueTemp){
         EventsLog temp = new EventsLog();
         temp.setId_param(this.t);
@@ -105,6 +107,8 @@ public class ArduinoConnector implements Runnable {
         temp.setValue(valueTemp);
         saveToBase(temp);
     }
+
+    //Подготовка и передача даннх в метод saveToBase
     private void setValueRH(double valueRH){
         EventsLog vRH = new EventsLog();
         vRH.setId_param(this.rh);
@@ -115,6 +119,7 @@ public class ArduinoConnector implements Runnable {
         saveToBase(vRH);
     }
 
+    //Получание Даты события, берется с компа.
     private Date getDate(){
         Calendar c = Calendar.getInstance();
         GregorianCalendar calendar = new GregorianCalendar(c.get(Calendar.YEAR),c.get(Calendar.MONTH), c.get(Calendar.DATE));
@@ -122,6 +127,7 @@ public class ArduinoConnector implements Runnable {
         return hireDay;
     }
 
+    //Получение времени события, берется с компа.
     private Time getTime(){
         Time time = new Time(new Date().getTime());
         return time;
